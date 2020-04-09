@@ -1,6 +1,7 @@
 package com.rssignaturecapture;
 
 import android.util.Log;
+import android.graphics.Color;
 
 import com.facebook.infer.annotation.Assertions;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -21,6 +22,8 @@ public class RSSignatureCaptureViewManager extends ViewGroupManager<RSSignatureC
 	public static final String PROPS_VIEW_MODE = "viewMode";
 	public static final String PROPS_SHOW_NATIVE_BUTTONS="showNativeButtons";
 	public static final String PROPS_MAX_SIZE="maxSize";
+	public static final String PROPS_MIN_STROKE_WIDTH="minStrokeWidth";
+	public static final String PROPS_MAX_STROKE_WIDTH="maxStrokeWidth";
 	public static final String PROPS_STROKE_COLOR="strokeColor";
 	public static final String PROPS_BACKGROUND_COLOR="backgroundColor";
 
@@ -72,19 +75,36 @@ public class RSSignatureCaptureViewManager extends ViewGroupManager<RSSignatureC
 		}
 	}
 
-	@ReactProp(name = PROPS_BACKGROUND_COLOR, customType = "Color")
-	public void setBackgroundColor(RSSignatureCaptureMainView view, @Nullable Integer color) {
-		Log.d("setBackgroundColor:", "" + color);
-		if(view!=null) {
-			view.setBackgroundColor(color);
+
+	@ReactProp(name = PROPS_MIN_STROKE_WIDTH)
+	public void setPropsMinStrokeWidth(RSSignatureCaptureMainView view, @Nullable int minStrokeWidth) {
+		Log.d("minStrokeWidth:",  ""+minStrokeWidth);
+		if(view!=null){
+			view.getSignatureView().setMinStrokeWidth(minStrokeWidth);
 		}
 	}
 
-	@ReactProp(name = PROPS_STROKE_COLOR, customType = "Color")
-	public void setStrokeColor(RSSignatureCaptureMainView view, @Nullable Integer color) {
-		Log.d("setStrokeColor:", "" + color);
-		if(view!=null) {
-			view.setStrokeColor(color);
+	@ReactProp(name = PROPS_MAX_STROKE_WIDTH)
+	public void setPropsMaxStrokeWidth(RSSignatureCaptureMainView view, @Nullable int maxStrokeWidth) {
+		Log.d("maxStrokeWidth:",  ""+maxStrokeWidth);
+		if(view!=null){
+			view.getSignatureView().setMaxStrokeWidth(maxStrokeWidth);
+		}
+	}
+
+	@ReactProp(name = PROPS_STROKE_COLOR)
+	public void setPropsStrokeColor(RSSignatureCaptureMainView view, @Nullable String color) {
+		Log.d("strokeColor:",  ""+color);
+		if(view!=null){
+			view.getSignatureView().setStrokeColor(Color.parseColor(color));
+		}
+	}
+
+	@ReactProp(name = PROPS_BACKGROUND_COLOR)
+	public void setPropsBackgroundColor(RSSignatureCaptureMainView view, @Nullable String color) {
+		Log.d("backgroundColor:",  ""+color);
+		if(view!=null){
+			view.getSignatureView().setBackgroundColor(Color.parseColor(color));
 		}
 	}
 
